@@ -12,6 +12,14 @@ const RECIPE = gql`
                     title,
                     ingredients,
                     directions,
+                    categories {
+                        data {
+                            id,
+                            attributes {
+                                name
+                            }
+                        }
+                    },
                     cover {
                         data {
                             attributes {
@@ -41,7 +49,11 @@ export default function Recipe() {
                 <div className="category-icon">i</div>
                 <div>
                     <h1>{data.recipe.data.attributes.title}</h1>
-                    <small>console list</small>
+                    <div>
+                        {data.recipe.data.attributes.categories.data.map(cat => (
+                            <small key={cat.id}>{cat.attributes.name}</small>
+                        ))}
+                    </div>
                 </div>
                 {data.recipe.data.attributes.cover.data ?
                     <div className='image-container'>

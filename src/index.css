@@ -23,11 +23,19 @@ a {
   color: var(--color-primary);
   border-bottom: 1px dotted;
 }
+
+/* site header */
 .site-header h1 {
   font-size: 1.5em;
   color: var(--color-primary);
   padding-bottom: 10px;
   border-bottom: 2px solid;
+}
+.site-header .categories {
+  text-align: right;
+}
+.site-header .categories a{
+  margin-left: 10px;
 }
 
 /* recipe list */
@@ -60,7 +68,6 @@ a {
   margin: 0;
 }
 .recipe-card small {
-  display: block;
   margin-right: 10px;
   margin-bottom: 10px;
   color: #777;
@@ -105,7 +112,6 @@ a {
   margin: 0;
 }
 .recipe-detail small {
-  display: block;
   margin-right: 10px;
   margin-bottom: 10px;
   color: #777;
@@ -122,3 +128,4 @@ a {
   height: 100%;
   object-fit: cover;
 }
+

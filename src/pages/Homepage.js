@@ -9,6 +9,14 @@ const RECIPES = gql`
                 id,
                 attributes {
                     title,
+                    categories {
+                        data {
+                            id,
+                            attributes {
+                                name
+                            }
+                        }
+                    }
                     cover {
                         data {
                             attributes {
@@ -19,7 +27,7 @@ const RECIPES = gql`
                     }
                 }
             }
-        } 
+        }
     }
 `;
 
@@ -36,7 +44,11 @@ export default function Homepage() {
                     <div className="category-icon">i</div>
                     <div>
                         <h2>{recipe.attributes.title}</h2>
-                        <small>console list</small>
+                        <div>
+                            {recipe.attributes.categories.data.map(cat => (
+                                <small key={cat.id}>{cat.attributes.name}</small>
+                            ))}
+                        </div>
                         <Link to={`/recipe/${recipe.id}`}>View recipe</Link>
                     </div>
                     {recipe.attributes.cover.data ?
