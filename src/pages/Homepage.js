@@ -19,7 +19,6 @@ export default function Homepage() {
                     </div>
                     {recipe.attributes.cover.data ?
                         <div className='image-container'>
-                            {/* {console.log(recipe.attributes.cover.data.attributes.formats)} */}
                             <img src={`http://localhost:1337${recipe.attributes.cover.data?.attributes?.formats?.thumbnail?.url}`}
                                 alt={recipe.attributes.cover.data?.attributes?.alternativeText}
                                 width="100"
