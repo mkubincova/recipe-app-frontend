@@ -29,3 +29,51 @@ a {
   padding-bottom: 10px;
   border-bottom: 2px solid;
 }
+
+/* recipe list */
+.recipe-card {
+  background-color: white;
+  margin: 60px auto;
+  padding: 20px 20px 20px 70px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.recipe-card .category-icon {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  background-color: var(--color-primary);
+  font-size: 2em;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.recipe-card h2 {
+  margin: 0;
+}
+.recipe-card small {
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  color: #777;
+}
+
+.recipe-card .image-container {
+  height: 100px;
+  aspect-ratio: 1 / 1;
+  background: #8e2ad6;
+  overflow: hidden;
+}
+.recipe-card .image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
