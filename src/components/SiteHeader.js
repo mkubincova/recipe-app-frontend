@@ -1,7 +1,8 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useQuery, gql } from "@apollo/client";
 import CategoryIcon from './CategoryIcon';
+import { ArrowLeft } from "lucide-react";
 
 const CATGORIES = gql`
     query GetCategories {
@@ -18,12 +19,17 @@ const CATGORIES = gql`
 
 export default function SiteHeader() {
     const { data } = useQuery(CATGORIES);
-
     const categories = data ? data.categories.data : [];
 
+    const location = useLocation();
+    if (location.pathname.includes('recipe/')) return (
+        <div className="header container">
+            <Link to="/" className='icon-button'><ArrowLeft /></Link>
+        </div>
+    );
     return (
         <div className="header container">
-            <Link to="/"><h1>My recipes</h1></Link>
+            <h1>My recipes</h1>
             <div className='categories-gradient'>
                 <ul className="categories">
                     <li>
