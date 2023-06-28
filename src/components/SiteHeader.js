@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, gql } from "@apollo/client";
+import CategoryIcon from './CategoryIcon';
 
 const CATGORIES = gql`
     query GetCategories {
@@ -16,20 +17,31 @@ const CATGORIES = gql`
 `;
 
 export default function SiteHeader() {
-    const { loading, error, data } = useQuery(CATGORIES);
+    const { data } = useQuery(CATGORIES);
 
-    if (loading) return <p>Loading categories...</p>;
-    if (error) return <p>Error fetching categories</p>;
+    const categories = data ? data.categories.data : [];
 
     return (
-        <div className="site-header">
+        <div className="header container">
             <Link to="/"><h1>My recipes</h1></Link>
-            <nav className='categories'>
-                <span>Filter recipes by category:</span>
-                {data.categories.data.map(category => (
-                    <Link key={category.id} to={`/category/${category.id}`}>{category.attributes.name}</Link>
-                ))}
-            </nav>
+            <div className='categories-gradient'>
+                <ul className="categories">
+                    <li>
+                        <Link to="/">
+                            <CategoryIcon id={0} />
+                            <span>All</span>
+                        </Link>
+                    </li>
+                    {categories.map(cat => (
+                        <li key={cat.id}>
+                            <Link to={`/category/${cat.id}`}>
+                                <CategoryIcon id={parseInt(cat.id)} />
+                                <span>{cat.attributes.name}</span>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }

@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+:root {
+    --font-size: 16px;
+
+    --color-bg: #F6F6F6;
+    --color-primary: hsl(175, 65%, 27%);
+    --color-primary-light: hsla(175, 65%, 27%, 0.3);
+    --color-accent: hsl(44, 94%, 50%);
+
+    --padding-sm: 15px;
+    --padding-md: 25px;
+    --padding-lg: 35px;
+
+    --categories-gap: 10px;
+    --recipe-card-list-gap: 15px;
+
+
+    @media (min-width: 640px) {
+        --font-size: 18px;
+    }
+}
+
+:focus-visible {
+    outline: 3px dotted var(--color-accent);
+}
+
+::selection {
+    background: var(--color-accent);
+}
+
+html {
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--font-size);
+}
+
+body {
+    margin: 0;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Kalam', cursive;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-left: var(--padding-sm);
+    padding-right: var(--padding-sm);
+
+    @media (min-width: 640px) {
+        padding-left: var(--padding-md);
+        padding-right: var(--padding-md);
+    }
+}
+
+.App {
+    min-height: 100vh;
+    background: var(--color-bg);
+}
+
+//card
+.recipe-card-list {
+    container: list / inline-size;
+
+    &-items {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--recipe-card-list-gap);
+    }
+}
+
+.recipe-card {
+    display: flex;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 0 1em rgba($color: #000000, $alpha: 0.15);
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.02) rotate(1deg);
+        -webkit-backface-visibility: hidden;
+        box-shadow: 0 0 1.5em rgba($color: #000000, $alpha: 0.15);
+    }
+
+    .image-container {
+        width: 30%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-primary-light);
+        position: relative;
+        overflow: hidden;
+
+        img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        svg {
+            width: 30%;
+            height: auto;
+        }
+    }
+
+    .text-container {
+        flex: 1;
+        padding: var(--padding-md) var(--padding-sm);
+
+        h2 {
+            font-size: 1.3rem;
+        }
+
+        .categories small {
+            opacity: 0.7;
+
+            &:not(:last-child)::after {
+                content: ', ';
+            }
+        }
+    }
+}
+
+@container list (min-width: 420px) {
+    .recipe-card-list-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .recipe-card {
+        flex-direction: column;
+
+        .image-container {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+        }
+    }
+}
+
+@container list (min-width: 620px) {
+    .recipe-card-list-items {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@container list (min-width: 920px) {
+    .recipe-card-list-items {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
+// header
+.header {
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        h1 {
+            text-align: center;
+            padding-top: var(--padding-md);
+            padding-bottom: var(--padding-sm);
+        }
+    }
+
+    .categories-gradient {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0 0 0 calc(100% - 25px);
+            background: linear-gradient(to left, var(--color-bg), transparent);
+        }
+    }
+
+    ul.categories {
+        list-style: none;
+        padding: 5px;
+        margin: var(--padding-sm) 0 var(--padding-lg) 0;
+        display: flex;
+        gap: var(--categories-gap);
+        overflow-x: auto;
+        position: relative;
+
+        li a {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+            color: var(--color-primary);
+            padding: 5px 10px;
+            border: 2px solid var(--color-primary);
+            border-radius: 50px;
+            text-transform: capitalize;
+            white-space: nowrap;
+
+            &:hover {
+                background: var(--color-primary-light);
+            }
+        }
+
+
+    }
+}
