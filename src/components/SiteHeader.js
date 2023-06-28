@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useQuery, gql } from "@apollo/client";
 import CategoryIcon from './CategoryIcon';
 
@@ -27,17 +27,17 @@ export default function SiteHeader() {
             <div className='categories-gradient'>
                 <ul className="categories">
                     <li>
-                        <Link to="/">
+                        <NavLink to="/">
                             <CategoryIcon id={0} />
                             <span>All</span>
-                        </Link>
+                        </NavLink>
                     </li>
                     {categories.map(cat => (
-                        <li key={cat.id}>
-                            <Link to={`/category/${cat.id}`}>
+                        <li key={cat.id} className=''>
+                            <NavLink to={`/category/${cat.id}`}>
                                 <CategoryIcon id={parseInt(cat.id)} />
                                 <span>{cat.attributes.name}</span>
-                            </Link>
+                            </NavLink>
                         </li>
                     ))}
                 </ul>
