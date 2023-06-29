@@ -8,7 +8,7 @@ export default function RecipeCard({ recipe }) {
         <Link to={`/recipe/${recipe.id}`} className='recipe-card'>
             <div className='image-container'>
                 {recipe.attributes.cover.data ?
-                    <img src={`http://localhost:1337${recipe.attributes.cover.data?.attributes?.formats?.small?.url}`}
+                    <img src={`${process.env.REACT_APP_BACKEND_URL}${recipe.attributes.cover.data?.attributes?.formats?.small?.url}`}
                         alt={recipe.attributes.cover.data?.attributes?.alternativeText}
                         width="100"
                         height="100"

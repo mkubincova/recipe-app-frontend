@@ -9,15 +9,17 @@ import Category from "./pages/Category";
 
 // apollo
 const client = new ApolloClient({
-  uri: 'http://localhost:1337/graphql',
+  uri: `${process.env.REACT_APP_BACKEND_URL}/graphql`,
   cache: new InMemoryCache()
 });
 
 function App() {
+
   return (
     <Router>
       <ApolloProvider client={client}>
         <div className="App">
+          {console.log()}
           <SiteHeader />
           <Routes>
             <Route exact path="/" element={<Homepage />} />
