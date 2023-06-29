@@ -60,7 +60,7 @@ export default function Recipe() {
             <div className='recipe-header'>
                 {recipe.attributes.cover.data ?
                     <div className='image-container' style={{ marginTop: -headerHeight }}>
-                        <img src={`${process.env.REACT_APP_BACKEND_URL}${recipe.attributes.cover.data?.attributes?.formats?.medium?.url}`}
+                        <img src={`${process.env.REACT_APP_IMG_URL}${recipe.attributes.cover.data?.attributes?.formats?.medium?.url}`}
                             alt={recipe.attributes.cover.data?.attributes?.alternativeText}
                             width="640"
                             height="640"
