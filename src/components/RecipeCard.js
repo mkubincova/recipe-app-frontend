@@ -9,7 +9,7 @@ export default function RecipeCard({ recipe }) {
             <div className='image-container'>
                 {recipe.attributes.cover.data ?
                     <img src={`${process.env.REACT_APP_IMG_URL}${recipe.attributes.cover.data?.attributes?.formats?.small?.url}`}
-                        alt={recipe.attributes.cover.data?.attributes?.alternativeText}
+                        alt=''
                         width="100"
                         height="100"
                     /> : <Utensils color="var(--color-primary)" />}

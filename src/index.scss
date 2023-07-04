@@ -21,7 +21,7 @@
     --paper-color: var(--color-accent-light);
     --paper-dark: hsla(44, 94%, 50%, 0.3);
 
-    --categories-gap: 10px;
+    --categories-gap: 5px;
     --recipe-card-list-gap: 15px;
 
 
@@ -81,6 +81,7 @@ h1 {
 //card
 .recipe-card-list {
     container: list / inline-size;
+    padding-bottom: var(--padding-md);
 
     &-items {
         display: grid;
@@ -190,24 +191,13 @@ small {
         padding-bottom: var(--padding-sm);
     }
 
-    .categories-gradient {
-        position: relative;
-
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0 0 0 calc(100% - 25px);
-            background: linear-gradient(to left, var(--color-bg), transparent);
-        }
-    }
-
     ul.categories {
         list-style: none;
-        padding: 5px;
+        padding: 0;
         margin: var(--padding-sm) 0;
         display: flex;
+        flex-wrap: wrap;
         gap: var(--categories-gap);
-        overflow-x: auto;
         position: relative;
 
         li a {
@@ -242,6 +232,8 @@ small {
     background: var(--color-primary);
     border-radius: 50%;
     transition: background-color 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
 
     &:hover {
         background: var(--color-primary-dark);
@@ -265,14 +257,24 @@ small {
             margin-left: calc(var(--padding-sm) * -1);
             width: 100vw;
             aspect-ratio: 1;
+            background-color: var(--color-primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            svg {
+                width: 30%;
+                height: auto;
+            }
         }
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
 
         @media (min-width: 640px) {
             flex-direction: row;
@@ -346,8 +348,25 @@ small {
     .ingredients {
         padding: var(--padding-sm) 0;
 
+        h3 {
+            position: relative;
+            z-index: 10;
+            background-color: var(--color-primary-light);
+            color: var(--color-primary);
+            width: fit-content;
+            padding: 5px;
+            margin-left: -10px;
+            margin-top: 30px;
+            transform: rotate(-2deg);
+            box-shadow: 0em 0em 0.3em rgba($color: #000000, $alpha: 0.15);
+
+            + ul {
+                margin-top: -15px;
+            }
+        }
+
         ul {
-            margin: 20px 0;
+            margin: 30px 0;
             list-style-position: inside;
             list-style-type: "– ";
             box-shadow: 0.3em 0.3em 1em rgba($color: #000000, $alpha: 0.15);
@@ -397,6 +416,8 @@ small {
 
             li {
                 margin: 10px 0;
+                display: flex;
+                align-items: center;
 
                 &::before {
                     counter-increment: step;
@@ -412,12 +433,10 @@ small {
                     margin-right: 10px;
                     font-family: 'Kalam', cursive;
                     font-size: 1.2rem;
+                    font-weight: 700;
+                    flex-shrink: 0;
                 }
             }
         }
     }
-}
-
-.hidden {
-    display: none !important;
 }

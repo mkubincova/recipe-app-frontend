@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { useQuery, gql } from "@apollo/client";
-import { AlarmClock, Flame, UtensilsCrossed } from "lucide-react";
+import { AlarmClock, Flame, UtensilsCrossed, Utensils } from "lucide-react";
 
 const RECIPE = gql`
     query GetRecipe($id: ID!) {
@@ -58,15 +58,22 @@ export default function Recipe() {
     return (
         <div className='recipe container'>
             <div className='recipe-header'>
-                {recipe.attributes.cover.data ?
-                    <div className='image-container' style={{ marginTop: -headerHeight }}>
-                        <img src={`${process.env.REACT_APP_IMG_URL}${recipe.attributes.cover.data?.attributes?.formats?.medium?.url}`}
-                            alt={recipe.attributes.cover.data?.attributes?.alternativeText}
+
+                <div className='image-container' style={{ marginTop: -headerHeight }}>
+                    {recipe.attributes.cover.data?.attributes?.formats?.medium ?
+                        (<img src={`${process.env.REACT_APP_IMG_URL}${recipe.attributes.cover.data.attributes.formats.medium.url}`}
+                            alt=''
                             width="640"
                             height="640"
-                        />
-                    </div> : <></>
-                }
+                        />) :
+                        recipe.attributes.cover.data?.attributes?.formats?.small ?
+                            (<img src={`${process.env.REACT_APP_IMG_URL}${recipe.attributes.cover.data.attributes.formats.small.url}`}
+                                alt=''
+                                width="640"
+                                height="640"
+                            />) : <Utensils color="var(--color-primary)" />}
+                </div>
+
                 <div className='text-container'>
                     <h1>{recipe.attributes.title}</h1>
                     <div className='categories'>
@@ -75,18 +82,24 @@ export default function Recipe() {
                         ))}
                     </div>
                     <div className='meta'>
-                        <div className={recipe.attributes.cookTimeMinutes ? '' : 'hidden'}>
-                            <AlarmClock />
-                            <span>{recipe.attributes.cookTimeMinutes}<small> min.</small></span>
-                        </div>
-                        <div className={recipe.attributes.cookTemperature ? '' : 'hidden'}>
-                            <Flame />
-                            <span>{recipe.attributes.cookTemperature}<small> °C</small></span>
-                        </div>
-                        <div className={recipe.attributes.portions ? '' : 'hidden'}>
-                            <UtensilsCrossed />
-                            <span>{recipe.attributes.portions}<small> portions</small></span>
-                        </div>
+                        {recipe.attributes.cookTimeMinutes ? (
+                            <div>
+                                <AlarmClock />
+                                <span>{recipe.attributes.cookTimeMinutes}<small> min.</small></span>
+                            </div>
+                        ) : ''}
+                        {recipe.attributes.cookTemperature ? (
+                            <div>
+                                <Flame />
+                                <span>{recipe.attributes.cookTemperature}<small> °C</small></span>
+                            </div>
+                        ) : ''}
+                        {recipe.attributes.portions ? (
+                            <div>
+                                <UtensilsCrossed />
+                                <span>{recipe.attributes.portions}<small> portions</small></span>
+                            </div>
+                        ) : ''}
                     </div>
                 </div>
             </div>
@@ -94,17 +107,17 @@ export default function Recipe() {
             <div className='recipe-body'>
                 <div className="ingredients">
                     <h2>Ingredients:</h2>
-
                     <ReactMarkdown>
                         {data.recipe.data.attributes.ingredients}
                     </ReactMarkdown>
                 </div>
-                <div className="directions">
+
+                {data.recipe.data.attributes.directions ? <div className="directions">
                     <h2>Directions:</h2>
                     <ReactMarkdown>
                         {data.recipe.data.attributes.directions}
                     </ReactMarkdown>
-                </div>
+                </div> : ""}
             </div>
         </div>
     );
