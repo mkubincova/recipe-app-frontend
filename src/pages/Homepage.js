@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useQuery, gql } from "@apollo/client";
 import RecipeCardList from "../components/RecipeCardList";
+import useGetTotal from '../hooks/useGetTotal';
 
 const RECIPES = gql`
     query GetRecipes($start: Int, $limit: Int) {
@@ -30,34 +31,16 @@ const RECIPES = gql`
     }
 `;
 
-const TOTAL = gql`
-    query GetTotal {
-        recipes(pagination: { limit: -1 }) {
-            data {
-                id
-            }
-        }
-    }
-`;
-
-
 export default function Homepage() {
     const pageSize = 12;
-    const [maxRecipes, setMaxRecipes] = useState(0);
     const [limit, setLimit] = useState(pageSize);
     const [oldData, setOldData] = useState([]);
 
+    const total = useGetTotal();
 
     const { error, loading, data, fetchMore } = useQuery(RECIPES, {
         variables: { start: 0, limit: limit }
     });
-
-    const { data: totalData } = useQuery(TOTAL);
-
-    useEffect(() => {
-        if (!totalData) return;
-        setMaxRecipes(totalData.recipes.data.length);
-    }, [totalData]);
 
     const loadMore = () => {
         setOldData(data.recipes.data);
@@ -83,7 +66,7 @@ export default function Homepage() {
                 {loading ?
                     <p className='text-center pb-md'>Loading...</p> :
                     <div className='text-center pb-md'>
-                        {data.recipes.data.length < maxRecipes ? <button onClick={loadMore}>Load more</button> : ''}
+                        {data.recipes.data.length < total ? <button onClick={loadMore}>Load more</button> : ''}
                     </div>
                 }
             </div>

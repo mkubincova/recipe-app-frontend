@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useQuery, gql } from "@apollo/client";
 import RecipeCardList from "../components/RecipeCardList";
 import { useParams } from 'react-router-dom';
+import useGetTotal from '../hooks/useGetTotal';
 
 const RECIPES = gql`
     query GetRecipes($id: ID!, $start: Int, $limit: Int) {
@@ -32,29 +33,13 @@ const RECIPES = gql`
     }
 `;
 
-const TOTAL = gql`
-    query GetTotal($id: ID!) {
-        recipes(pagination: { limit: -1 }, filters: { categories: {id : { eq: $id }} }) {
-            data {
-                id,
-                attributes {
-                    categories {
-                        data {
-                            id
-                        }
-                    }
-                }
-            }
-        }
-    }
-`;
-
 export default function Category() {
     const { id } = useParams();
     const pageSize = 12;
-    const [maxRecipes, setMaxRecipes] = useState(0);
     const [limit, setLimit] = useState(pageSize);
     const [oldData, setOldData] = useState([]);
+
+    const total = useGetTotal(id);
 
     useEffect(() => {
         setOldData([]);
@@ -65,14 +50,6 @@ export default function Category() {
         variables: { start: 0, limit: limit, id: id }
     });
 
-    const { data: totalData } = useQuery(TOTAL, {
-        variables: { id: id }
-    });
-
-    useEffect(() => {
-        if (!totalData) return;
-        setMaxRecipes(totalData.recipes.data.length);
-    }, [totalData]);
 
     const loadMore = () => {
         setOldData(data.recipes.data);
@@ -98,7 +75,7 @@ export default function Category() {
                 {loading ?
                     <p className='text-center pb-md'>Loading...</p> :
                     <div className='text-center pb-md'>
-                        {data.recipes.data.length < maxRecipes ? <button onClick={loadMore}>Load more</button> : ''}
+                        {data.recipes.data.length < total ? <button onClick={loadMore}>Load more</button> : ''}
                     </div>
                 }
             </div>
