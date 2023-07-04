@@ -19,7 +19,6 @@ function App() {
     <Router>
       <ApolloProvider client={client}>
         <div className="App">
-          {console.log()}
           <SiteHeader />
           <Routes>
             <Route exact path="/" element={<Homepage />} />

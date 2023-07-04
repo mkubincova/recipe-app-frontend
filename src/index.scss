@@ -146,6 +146,28 @@ small {
     }
 }
 
+button:not(.icon-button) {
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    background-color: var(--color-accent);
+    padding: 10px 15px;
+    border-radius: 50px;
+
+    &:hover {
+        background-color: var(--color-accent-dark);
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.pb-md {
+    padding-bottom: var(--padding-md);
+}
+
 @container list (min-width: 420px) {
     .recipe-card-list-items {
         grid-template-columns: repeat(2, 1fr);
