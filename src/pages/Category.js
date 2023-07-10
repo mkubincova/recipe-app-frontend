@@ -3,6 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 import RecipeCardList from "../components/RecipeCardList";
 import { useParams } from 'react-router-dom';
 import useGetTotal from '../hooks/useGetTotal';
+import ScrollToTop from "../components/ScrollToTop";
 
 const RECIPES = gql`
     query GetRecipes($id: ID!, $start: Int, $limit: Int) {
@@ -79,6 +80,7 @@ export default function Category() {
                     </div>
                 }
             </div>
+            <ScrollToTop />
         </div>
     );
 }

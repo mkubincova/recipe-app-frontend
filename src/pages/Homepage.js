@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery, gql } from "@apollo/client";
 import RecipeCardList from "../components/RecipeCardList";
+import ScrollToTop from "../components/ScrollToTop";
 import useGetTotal from '../hooks/useGetTotal';
 
 const RECIPES = gql`
@@ -70,6 +71,7 @@ export default function Homepage() {
                     </div>
                 }
             </div>
+            <ScrollToTop />
         </div>
     );
 }
