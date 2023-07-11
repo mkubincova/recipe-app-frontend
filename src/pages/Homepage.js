@@ -61,7 +61,7 @@ export default function Homepage() {
     if (error) return <p className='container'>Error</p>;
 
     return (
-        <div className="homepage">
+        <div className="homepage app-body">
             <div className='container pb-30'>
                 <RecipeCardList recipes={data?.recipes?.data || oldData} />
                 {loading ?

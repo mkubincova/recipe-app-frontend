@@ -51,7 +51,7 @@ export default function Recipe() {
     const recipe = data.recipe.data;
 
     return (
-        <div className='recipe container'>
+        <div className='recipe container app-body'>
             <div className='recipe-header'>
 
                 <div className='recipe-header__img'>

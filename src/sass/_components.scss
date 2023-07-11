@@ -2,11 +2,22 @@
     z-index: 10;
 }
 
+.footer {
+    font-size: smaller;
+
+    @media (min-width: $breakpoint-md) {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
 .container {
-    max-width: 960px;
+    width: 960px;
+    max-width: 100%;
     margin: 0 auto;
     padding-left: 10px;
     padding-right: 10px;
+    box-sizing: border-box;
 
     @media (min-width: $breakpoint-sm) {
         padding-left: 20px;

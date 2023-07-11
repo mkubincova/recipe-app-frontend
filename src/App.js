@@ -6,6 +6,7 @@ import SiteHeader from "./components/SiteHeader";
 import Homepage from "./pages/Homepage";
 import Recipe from "./pages/Recipe";
 import Category from "./pages/Category";
+import Footer from "./components/Footer";
 
 // apollo
 const client = new ApolloClient({
@@ -25,6 +26,7 @@ function App() {
             <Route path="/recipe/:id" element={<Recipe />} />
             <Route path="/category/:id" element={<Category />} />
           </Routes>
+          <Footer />
         </div>
       </ApolloProvider>
     </Router>

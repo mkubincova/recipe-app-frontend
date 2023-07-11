@@ -31,4 +31,18 @@ h1 {
 .App {
     min-height: 100vh;
     background: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+
+    .app-body {
+        flex: 1;
+    }
+}
+
+a {
+    color: inherit;
+
+    &:hover {
+        text-decoration: none;
+    }
 }

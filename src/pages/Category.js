@@ -70,7 +70,7 @@ export default function Category() {
     if (error) return <p className='container'>Error</p>;
 
     return (
-        <div className="category">
+        <div className="category app-body">
             <div className='container pb-30'>
                 <RecipeCardList recipes={data?.recipes?.data || oldData} />
                 {loading ?
