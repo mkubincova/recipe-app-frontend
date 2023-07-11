@@ -10,7 +10,8 @@ const CATGORIES = gql`
             data {
                 id,
                 attributes {
-                    name
+                    name,
+                    theme_color
                 }
             }
         }
@@ -24,29 +25,29 @@ export default function SiteHeader() {
 
     const location = useLocation();
     if (location.pathname.includes('recipe/')) return (
-        <div className="header container">
-            <button onClick={() => navigate(-1)} className='icon-button' aria-label='Go back'><ArrowLeft /></button>
+        <div className="relative container">
+            <button onClick={() => navigate(-1)} id='back' className='btn btn--icon' aria-label='Go back'><ArrowLeft /></button>
         </div>
     );
     return (
-        <div className="header container">
-            <h1>My recipes</h1>
-            <ul className="categories">
+        <div className="header container pt-30 pb-30">
+            <h1 className='text-center pb-30'>My recipes</h1>
+            <ul className="category-menu">
                 <li>
-                    <NavLink to="/">
+                    <NavLink to="/" className="btn btn--category" >
                         <CategoryIcon id={0} />
                         <span>All</span>
                     </NavLink>
                 </li>
                 {categories.map(cat => (
-                    <li key={cat.id} className=''>
-                        <NavLink to={`/category/${cat.id}`}>
+                    <li key={cat.id} >
+                        <NavLink to={`/category/${cat.id}`} className="btn btn--category" style={{ "--color": `var(--${cat.attributes.theme_color})` }} >
                             <CategoryIcon id={parseInt(cat.id)} />
                             <span>{cat.attributes.name}</span>
                         </NavLink>
                     </li>
                 ))}
             </ul>
-        </div>
+        </div >
     );
 }

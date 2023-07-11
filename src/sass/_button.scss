@@ -1,0 +1,60 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 2px solid hsl(var(--primary));
+    border-radius: 50px;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 10px 15px;
+    color: inherit;
+    background-color: var(--color-bg);
+    cursor: pointer;
+
+    &:hover {
+        background-image: linear-gradient(hsla(var(--color, var(--primary)), 0.2), hsla(var(--color, var(--primary)), 0.2));
+    }
+
+    &--primary {
+        color: var(--color-bg);
+        background: hsl(var(--primary));
+    }
+
+    &--icon {
+        width: 40px;
+        aspect-ratio: 1;
+        padding: 0;
+        border-radius: 50%;
+    }
+
+    &--category {
+        padding: 5px 10px;
+        text-transform: capitalize;
+        color: hsl(var(--color, var(--primary)));
+        border-color: hsl(var(--color, var(--primary)));
+
+        &.active {
+            color: var(--color-bg);
+            background-color: hsl(var(--color, var(--primary)));
+        }
+    }
+}
+
+#back {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#top {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    transform: scale(0);
+    transition: transform 0.3s ease-in-out;
+
+    &.show {
+        transform: scale(1);
+    }
+}

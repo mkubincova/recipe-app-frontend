@@ -1,0 +1,34 @@
+:focus-visible {
+    outline: 3px dotted hsl(var(--yellow));
+}
+
+::selection {
+    background: hsl(var(--yellow));
+}
+
+html {
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--font-size);
+    color: var(--color-text);
+}
+
+body {
+    margin: 0;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Kalam', cursive;
+    margin: 0;
+    line-height: 1.1;
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+}
+
+.App {
+    min-height: 100vh;
+    background: var(--color-bg);
+}

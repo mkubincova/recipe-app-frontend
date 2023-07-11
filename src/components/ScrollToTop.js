@@ -22,6 +22,6 @@ export default function ScrollToTop() {
     return (
         <button onClick={() => {
             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-        }} className={`icon-button to-top ${showContent ? 'show' : ''}`} aria-label='Go back'><ArrowUp /></button>
+        }} id='top' className={`btn btn--icon to-top ${showContent ? 'show' : ''}`} aria-label='Go back'><ArrowUp /></button>
     );
 }

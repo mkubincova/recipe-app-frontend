@@ -1,0 +1,35 @@
+$breakpoint-sm: 640px;
+
+:root {
+    --font-size: 16px;
+    --font-size-h1: 2.5rem;
+
+    --primary: 208, 51%, 19%;
+    --pink: 350, 73%, 68%;
+    --red: 357, 65%, 52%;
+    --orange: 11, 80%, 63%;
+    --yellow: 36, 86%, 59%;
+    --green: 95, 35%, 55%;
+    --blue: 180, 42%, 50%;
+    --purple: 275, 19%, 53%;
+    --brown: 19, 33%, 25%;
+    --grey: 210, 2%, 82%;
+
+    --color-text: hsl(var(--primary));
+    --color-bg: hsl(36, 45%, 94%);
+
+    --paper-dark: hsl(var(--yellow));
+    --tape-gray: #dbd8be;
+    --tape-edge-gray: #b7b49d;
+    --paper-color: hsla(var(--yellow), 0.5);
+    --paper-dark: hsla(var(--brown), 0.1);
+
+    --box-shadow: 0 0 1em hsla(var(--primary), 0.2);
+    --box-shadow-hover: 0 0 1.5em hsla(var(--primary), 0.2);
+
+
+    @media (min-width: $breakpoint-sm) {
+        --font-size: 18px;
+        --font-size-h1: 3rem;
+    }
+}

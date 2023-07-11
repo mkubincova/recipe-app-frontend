@@ -62,12 +62,12 @@ export default function Homepage() {
 
     return (
         <div className="homepage">
-            <div className='container'>
+            <div className='container pb-30'>
                 <RecipeCardList recipes={data?.recipes?.data || oldData} />
                 {loading ?
                     <p className='text-center pb-md'>Loading...</p> :
                     <div className='text-center pb-md'>
-                        {data.recipes.data.length < total ? <button onClick={loadMore}>Load more</button> : ''}
+                        {data.recipes.data.length < total ? <button onClick={loadMore} className='btn btn--primary'>Load more</button> : ''}
                     </div>
                 }
             </div>

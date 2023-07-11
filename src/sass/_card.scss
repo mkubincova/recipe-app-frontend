@@ -1,0 +1,82 @@
+.card-list-container {
+    container: list / inline-size;
+}
+
+.card-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.card {
+    display: flex;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.02) rotate(1deg);
+        -webkit-backface-visibility: hidden;
+        box-shadow: var(--box-shadow-hover);
+    }
+
+    &__img {
+        width: 30%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: hsla(var(--green), 0.4);
+        position: relative;
+        overflow: hidden;
+
+        img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        svg {
+            width: 30%;
+            height: auto;
+            stroke: hsl(var(--green));
+        }
+    }
+
+    &__text {
+        flex: 1;
+
+        h2 {
+            font-size: 1.3rem;
+        }
+    }
+}
+
+@container list (min-width: 420px) {
+    .card-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        flex-direction: column;
+
+        .card__img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+        }
+    }
+}
+
+@container list (min-width: 620px) {
+    .card-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@container list (min-width: 920px) {
+    .card-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

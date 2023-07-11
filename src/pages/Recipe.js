@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { useQuery, gql } from "@apollo/client";
-import { AlarmClock, Flame, UtensilsCrossed, Utensils } from "lucide-react";
+import { Utensils } from "lucide-react";
+import RecipeMeta from '../components/RecipeMeta';
 
 const RECIPE = gql`
     query GetRecipe($id: ID!) {
@@ -44,14 +45,8 @@ export default function Recipe() {
         variables: { id: id }
     });
 
-    const [headerHeight, setHeaderHeight] = useState(0);
-
-    useEffect(() => {
-        setHeaderHeight(document.querySelector('.header').clientHeight);
-    }, []);
-
-    if (loading) return <p className='container'>Loading...</p>;
-    if (error) return <p className='container'>Error</p>;
+    if (loading) return <p className='container text-center'>Loading...</p>;
+    if (error) return <p className='container text-center'>Error</p>;
 
     const recipe = data.recipe.data;
 
@@ -59,7 +54,7 @@ export default function Recipe() {
         <div className='recipe container'>
             <div className='recipe-header'>
 
-                <div className='image-container' style={{ marginTop: -headerHeight }}>
+                <div className='recipe-header__img'>
                     {recipe.attributes.cover.data?.attributes?.formats?.medium ?
                         (<img src={`${process.env.REACT_APP_IMG_URL}${recipe.attributes.cover.data.attributes.formats.medium.url}`}
                             alt=''
@@ -71,49 +66,30 @@ export default function Recipe() {
                                 alt=''
                                 width="640"
                                 height="640"
-                            />) : <Utensils color="var(--color-primary)" />}
+                            />) : <Utensils />}
                 </div>
 
-                <div className='text-container'>
+                <div className='recipe-header__text'>
                     <h1>{recipe.attributes.title}</h1>
-                    <div className='categories'>
+                    <div className='categories mb-20'>
                         {recipe.attributes.categories.data.map(cat => (
                             <small key={cat.id}>{cat.attributes.name}</small>
                         ))}
                     </div>
-                    <div className='meta'>
-                        {recipe.attributes.cookTimeMinutes ? (
-                            <div>
-                                <AlarmClock />
-                                <span>{recipe.attributes.cookTimeMinutes}<small> min.</small></span>
-                            </div>
-                        ) : ''}
-                        {recipe.attributes.cookTemperature ? (
-                            <div>
-                                <Flame />
-                                <span>{recipe.attributes.cookTemperature}<small> °C</small></span>
-                            </div>
-                        ) : ''}
-                        {recipe.attributes.portions ? (
-                            <div>
-                                <UtensilsCrossed />
-                                <span>{recipe.attributes.portions}<small> portions</small></span>
-                            </div>
-                        ) : ''}
-                    </div>
+                    <RecipeMeta cookTime={recipe.attributes.cookTimeMinutes} temp={recipe.attributes.cookTemperature} portions={recipe.attributes.portions} />
                 </div>
             </div>
 
             <div className='recipe-body'>
-                <div className="ingredients">
-                    <h2>Ingredients:</h2>
+                <div className="ingredients pt-40">
+                    <h2 className='mb-15'>Ingredients:</h2>
                     <ReactMarkdown>
                         {data.recipe.data.attributes.ingredients}
                     </ReactMarkdown>
                 </div>
 
-                {data.recipe.data.attributes.directions ? <div className="directions">
-                    <h2>Directions:</h2>
+                {data.recipe.data.attributes.directions ? <div className="directions pt-40">
+                    <h2 className='mb-15'>Directions:</h2>
                     <ReactMarkdown>
                         {data.recipe.data.attributes.directions}
                     </ReactMarkdown>
